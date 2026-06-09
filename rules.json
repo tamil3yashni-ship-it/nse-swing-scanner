@@ -1,0 +1,81 @@
+{
+  "version": "1.0",
+  "strategy": "swing-trading",
+  "exchange": {
+    "primary": "NSE",
+    "fallback": "BSE"
+  },
+  "market_hours": {
+    "open": "09:15",
+    "close": "15:30",
+    "timezone": "Asia/Kolkata",
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "avoid_first_minutes": 15,
+    "avoid_first_window": "09:15–09:30 IST"
+  },
+  "watchlist": {
+    "indices": [
+      { "symbol": "NIFTY 50",  "token": "99926000", "exchange": "NSE" },
+      { "symbol": "BANKNIFTY", "token": "99926009", "exchange": "NSE" },
+      { "symbol": "SENSEX",    "token": "99919000", "exchange": "BSE" }
+    ],
+    "large_caps": [
+      { "symbol": "RELIANCE",  "exchange": "NSE" },
+      { "symbol": "TCS",       "exchange": "NSE" },
+      { "symbol": "INFY",      "exchange": "NSE" },
+      { "symbol": "HDFCBANK",  "exchange": "NSE" },
+      { "symbol": "ICICIBANK", "exchange": "NSE" }
+    ],
+    "fno_actives": [
+      "NIFTY", "BANKNIFTY", "FINNIFTY",
+      "RELIANCE", "TCS", "INFY", "HDFCBANK", "ICICIBANK",
+      "SBIN", "AXISBANK", "KOTAKBANK", "LT", "WIPRO", "BHARTIARTL"
+    ]
+  },
+  "timeframes": ["weekly", "daily", "1H"],
+  "indicators": {
+    "rsi": { "period": 14 },
+    "macd": { "fast": 12, "slow": 26, "signal": 9 },
+    "ema_fast": { "period": 50 },
+    "ema_slow": { "period": 200 },
+    "volume": { "use_relative_volume": true },
+    "supertrend": { "period": 7, "multiplier": 3 }
+  },
+  "bias": {
+    "bullish": {
+      "description": "Price above both 50 EMA and 200 EMA; RSI between 55–70; higher highs and higher lows structure",
+      "conditions": [
+        "price > ema_50",
+        "price > ema_200",
+        "rsi >= 55",
+        "rsi <= 70",
+        "higher_highs == true",
+        "higher_lows == true"
+      ]
+    },
+    "bearish": {
+      "description": "Price below both 50 EMA and 200 EMA; RSI between 30–45; lower highs and lower lows structure",
+      "conditions": [
+        "price < ema_50",
+        "price < ema_200",
+        "rsi >= 30",
+        "rsi <= 45",
+        "lower_highs == true",
+        "lower_lows == true"
+      ]
+    }
+  },
+  "risk_rules": {
+    "max_capital_risk_per_trade_pct": 1.0,
+    "min_reward_to_risk_ratio": 2.0,
+    "no_trade_window_open": "09:15–09:30 IST",
+    "avoid_before_major_economic_events": true,
+    "major_event_buffer_minutes": 30,
+    "notes": [
+      "No trading in first 15 minutes after market open (09:15–09:30 IST).",
+      "Avoid entering positions within 30 minutes before scheduled RBI, GDP, or CPI announcements.",
+      "Maximum 1% of total capital at risk per trade (position size = risk / (entry - stop_loss)).",
+      "Minimum 2:1 reward-to-risk ratio required before entry."
+    ]
+  }
+}

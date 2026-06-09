@@ -1,0 +1,46 @@
+{
+  "mcpServer": {
+    "name": "angel-one",
+    "package": "angel-one-mcp",
+    "version": "1.0.10",
+    "npmRegistry": "https://www.npmjs.com/package/angel-one-mcp",
+    "globalInstallPath": "/opt/node22/lib/node_modules/angel-one-mcp/build/index.js",
+    "command": "node",
+    "args": ["/opt/node22/lib/node_modules/angel-one-mcp/build/index.js"],
+    "requiredEnvVars": [
+      "ANGEL_API_KEY",
+      "ANGEL_CLIENT_ID",
+      "ANGEL_PASSWORD",
+      "ANGEL_TOTP_SECRET"
+    ],
+    "optionalEnvVars": {
+      "SOFT_MAX_ORDER_QTY": "25 (default)",
+      "HARD_MAX_ORDER_QTY": "100 (default)",
+      "SOFT_MAX_ORDER_VALUE": "10000 (default)",
+      "HARD_MAX_ORDER_VALUE": "100000 (default)"
+    },
+    "credentialsFile": "~/angel-one-mcp/.env",
+    "mcpConfigFile": "~/.claude/mcp.json",
+    "tools": [
+      "authenticate",
+      "logout",
+      "get_ltp",
+      "search_instruments",
+      "place_order",
+      "get_portfolio_holdings",
+      "get_positions",
+      "get_user_profile",
+      "calculate_margin",
+      "manage_gtt_orders"
+    ]
+  },
+  "setup": {
+    "install": "npm install -g angel-one-mcp",
+    "credentialsSources": {
+      "ANGEL_API_KEY": "https://smartapi.angelbroking.com — create an app to get your API key",
+      "ANGEL_CLIENT_ID": "Your Angel One trading account client ID (e.g. A123456)",
+      "ANGEL_PASSWORD": "Your Angel One MPIN (4-digit PIN)",
+      "ANGEL_TOTP_SECRET": "Base32 secret shown when setting up TOTP/2FA authenticator (not the 6-digit OTP)"
+    }
+  }
+}
